@@ -1,0 +1,79 @@
+{
+  "dump_cycle": 100,
+  "in_dim": 8,
+  "env": {
+    "name": "MinWMEnvA-v0",
+    "dim": 2,
+    "sample_period": 2,
+    "response_period": 3,
+    "match_delay": 1,
+    "reward_delay": 1
+  },
+  "ActionDeterminer": {
+    "in_dim": 10,
+    "n_action": 2,
+    "stub": false,
+    "init_action": false,
+    "use_success_rate": true,
+    "sr_cycle": 100,
+    "init_success_rate": 0.5,
+    "learning_mode": "fl",
+    "dump_learn": false,
+    "learning_dump": "AD_learning.dmp",
+    "use_dump": false,
+    "BG": {
+      "threshold": 0.01,
+      "disinhibition_length": 2,
+      "rl_agent": "ppo",
+      "rl_batch_size": 10,
+      "accumulation_length": 1
+    },
+    "NeoCortex": {
+      "Accumulator": {
+        "attenuation": 0.4,
+        "input_weight": 0.5,
+        "noise_weight": 0.5
+      },
+      "ActionPredictor": {
+        "intra_dim": 4,
+        "batch_size": 50,
+        "lr": 0.5,
+        "epochs": 100
+      }
+    }
+  },
+  "RegisterUnit": {
+    "in_dim": 8,
+    "n_action": 4,
+    "stub": true,
+    "init_action": false,
+    "use_success_rate": true,
+    "sr_cycle": 100,
+    "init_success_rate": 0.5,
+    "learning_mode": "fl",
+    "dump_learn": false,
+    "learning_dump": "RC_learning.dmp",
+    "use_dump": false,
+    "persistence": 8,
+    "BG": {
+      "threshold": 0.01,
+      "disinhibition_length": 2,
+      "rl_agent": "ppo",
+      "rl_batch_size": 10,
+      "accumulation_length": 1
+    },
+    "NeoCortex": {
+      "Accumulator": {
+        "attenuation": 0.4,
+        "input_weight": 0.5,
+        "noise_weight": 0.5
+      },
+      "ActionPredictor": {
+        "intra_dim": 4,
+        "batch_size": 50,
+        "lr": 0.5,
+        "epochs": 100
+      }
+    }
+  }
+}
