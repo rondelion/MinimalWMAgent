@@ -8,7 +8,7 @@ A minimal brain-inspired agent architecture with Working Memory
 * Learning with a [Minimal Cortex-Basal Ganglia Architecture](https://github.com/rondelion/MinimalCtxBGA)
 * A simple [Match-to-Sample task](https://en.wikipedia.org/wiki/Match-to-sample_task)
 
-Details are in [this article]https://rondelionai.blogspot.com/2022/02/report-on-implementation-of-minimal.html).
+Details are in [this article](https://rondelionai.blogspot.com/2022/02/report-on-implementation-of-minimal.html).
 
 ## How to Install
 * Clone the repository
