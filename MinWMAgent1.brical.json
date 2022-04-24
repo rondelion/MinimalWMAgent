@@ -1,0 +1,473 @@
+{
+ "Header": {
+  "Type": "A",
+  "Name": "MinWMAgent1",
+  "Base": "MinWMAgent1",
+  "Comment": "Minimal Working Memory Agent #1 with BriCA"
+ },
+ "Modules": [
+  {
+   "Name": "MinWMAgent",
+   "Comment": "MinWMAgent:the whole",
+   "SubModules": [
+    "RegisterUnit",
+    "ActionDeterminer"
+   ],
+   "Ports": [
+    {
+     "Name": "done",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "observation",
+     "Type": "Input",
+     "Shape": [
+      8
+     ]
+    },
+    {
+     "Name": "reward",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "token_in",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "action",
+     "Type": "Output",
+     "Shape": [
+      2
+     ]
+    },
+    {
+     "Name": "done",
+     "Type": "Output",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "token_out",
+     "Type": "Output",
+     "Shape": [
+      1
+     ]
+    }
+   ]
+  },
+  {
+   "Name": "RegisterUnit",
+   "Comment": "RegisterUnit:working memory",
+   "SubModules": [
+    "Register",
+    "RegisterController"
+   ],
+   "Ports": [
+    {
+     "Name": "done",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "observation",
+     "Type": "Input",
+     "Shape": [
+      8
+     ]
+    },
+    {
+     "Name": "reward",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "token_in",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "done",
+     "Type": "Output",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "out",
+     "Type": "Output",
+     "Shape": [
+      10
+     ]
+    },
+    {
+     "Name": "reward",
+     "Type": "Output",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "token_out",
+     "Type": "Output",
+     "Shape": [
+      1
+     ]
+    }
+   ]
+  },
+  {
+   "Name": "Register",
+   "Comment": "Register:STM + recognizer",
+   "ImplClass": "MinWMAgent1_1_BL.Register",
+   "Ports": [
+    {
+     "Name": "attention",
+     "Type": "Input",
+     "Shape": [
+      4
+     ]
+    },
+    {
+     "Name": "done",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "in",
+     "Type": "Input",
+     "Shape": [
+      8
+     ]
+    },
+    {
+     "Name": "reward",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "token_in",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "done",
+     "Type": "Output",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "out",
+     "Type": "Output",
+     "Shape": [
+      10
+     ]
+    },
+    {
+     "Name": "reward",
+     "Type": "Output",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "token_out",
+     "Type": "Output",
+     "Shape": [
+      1
+     ]
+    }
+   ]
+  },
+  {
+   "Name": "RegisterController",
+   "Comment": "RegisterController:attention control to part to remember",
+   "ImplClass": "CBT1cCA_1.CBT1Component",
+   "Ports": [
+    {
+     "Name": "done",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "observation",
+     "Type": "Input",
+     "Shape": [
+      8
+     ]
+    },
+    {
+     "Name": "reward",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "token_in",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "action",
+     "Type": "Output",
+     "Shape": [
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "Name": "ActionDeterminer",
+   "Comment": "ActionDeterminer:decision based on register & observation",
+   "ImplClass": "CBT1cCA_1.CBT1Component",
+   "Ports": [
+    {
+     "Name": "done",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "observation",
+     "Type": "Input",
+     "Shape": [
+      10
+     ]
+    },
+    {
+     "Name": "reward",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "token_in",
+     "Type": "Input",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "action",
+     "Type": "Output",
+     "Shape": [
+      2
+     ]
+    },
+    {
+     "Name": "done",
+     "Type": "Output",
+     "Shape": [
+      1
+     ]
+    },
+    {
+     "Name": "token_out",
+     "Type": "Output",
+     "Shape": [
+      1
+     ]
+    }
+   ]
+  }
+ ],
+ "Connections": [
+  {
+   "Name": "MinWMAgent-RegisterUnit",
+   "FromModule": "MinWMAgent",
+   "FromPort": "observation",
+   "ToModule": "RegisterUnit",
+   "ToPort": "observation"
+  },
+  {
+   "Name": "MinWMAgent-RegisterUnit",
+   "FromModule": "MinWMAgent",
+   "FromPort": "token_in",
+   "ToModule": "RegisterUnit",
+   "ToPort": "token_in"
+  },
+  {
+   "Name": "MinWMAgent-RegisterUnit",
+   "FromModule": "MinWMAgent",
+   "FromPort": "reward",
+   "ToModule": "RegisterUnit",
+   "ToPort": "reward"
+  },
+  {
+   "Name": "MinWMAgent-RegisterUnit",
+   "FromModule": "MinWMAgent",
+   "FromPort": "done",
+   "ToModule": "RegisterUnit",
+   "ToPort": "done"
+  },
+  {
+   "Name": "RegisterUnit-ActionDeterminer",
+   "FromModule": "RegisterUnit",
+   "FromPort": "out",
+   "ToModule": "ActionDeterminer",
+   "ToPort": "observation"
+  },
+  {
+   "Name": "RegisterUnit-ActionDeterminer",
+   "FromModule": "RegisterUnit",
+   "FromPort": "token_out",
+   "ToModule": "ActionDeterminer",
+   "ToPort": "token_in"
+  },
+  {
+   "Name": "RegisterUnit-ActionDeterminer",
+   "FromModule": "RegisterUnit",
+   "FromPort": "reward",
+   "ToModule": "ActionDeterminer",
+   "ToPort": "reward"
+  },
+  {
+   "Name": "RegisterUnit-ActionDeterminer",
+   "FromModule": "RegisterUnit",
+   "FromPort": "done",
+   "ToModule": "ActionDeterminer",
+   "ToPort": "done"
+  },
+  {
+   "Name": "RegisterUnit-Register",
+   "FromModule": "RegisterUnit",
+   "FromPort": "observation",
+   "ToModule": "Register",
+   "ToPort": "in"
+  },
+  {
+   "Name": "RegisterUnit-Register",
+   "FromModule": "RegisterUnit",
+   "FromPort": "token_in",
+   "ToModule": "Register",
+   "ToPort": "token_in"
+  },
+  {
+   "Name": "RegisterUnit-Register",
+   "FromModule": "RegisterUnit",
+   "FromPort": "reward",
+   "ToModule": "Register",
+   "ToPort": "reward"
+  },
+  {
+   "Name": "RegisterUnit-Register",
+   "FromModule": "RegisterUnit",
+   "FromPort": "done",
+   "ToModule": "Register",
+   "ToPort": "done"
+  },
+  {
+   "Name": "RegisterUnit-RegisterController",
+   "FromModule": "RegisterUnit",
+   "FromPort": "observation",
+   "ToModule": "RegisterController",
+   "ToPort": "observation"
+  },
+  {
+   "Name": "RegisterUnit-RegisterController",
+   "FromModule": "RegisterUnit",
+   "FromPort": "token_in",
+   "ToModule": "RegisterController",
+   "ToPort": "token_in"
+  },
+  {
+   "Name": "RegisterUnit-RegisterController",
+   "FromModule": "RegisterUnit",
+   "FromPort": "reward",
+   "ToModule": "RegisterController",
+   "ToPort": "reward"
+  },
+  {
+   "Name": "RegisterUnit-RegisterController",
+   "FromModule": "RegisterUnit",
+   "FromPort": "done",
+   "ToModule": "RegisterController",
+   "ToPort": "done"
+  },
+  {
+   "Name": "Register-RegisterUnit",
+   "FromModule": "Register",
+   "FromPort": "out",
+   "ToModule": "RegisterUnit",
+   "ToPort": "out"
+  },
+  {
+   "Name": "Register-RegisterUnit",
+   "FromModule": "Register",
+   "FromPort": "reward",
+   "ToModule": "RegisterUnit",
+   "ToPort": "reward"
+  },
+  {
+   "Name": "Register-RegisterUnit",
+   "FromModule": "Register",
+   "FromPort": "done",
+   "ToModule": "RegisterUnit",
+   "ToPort": "done"
+  },
+  {
+   "Name": "Register-RegisterUnit",
+   "FromModule": "Register",
+   "FromPort": "token_out",
+   "ToModule": "RegisterUnit",
+   "ToPort": "token_out"
+  },
+  {
+   "Name": "RegisterController-Register",
+   "FromModule": "RegisterController",
+   "FromPort": "action",
+   "ToModule": "Register",
+   "ToPort": "attention"
+  },
+  {
+   "Name": "ActionDeterminer-MinWMAgent",
+   "FromModule": "ActionDeterminer",
+   "FromPort": "action",
+   "ToModule": "MinWMAgent",
+   "ToPort": "action"
+  },
+  {
+   "Name": "ActionDeterminer-MinWMAgent",
+   "FromModule": "ActionDeterminer",
+   "FromPort": "done",
+   "ToModule": "MinWMAgent",
+   "ToPort": "done"
+  },
+  {
+   "Name": "ActionDeterminer-MinWMAgent",
+   "FromModule": "ActionDeterminer",
+   "FromPort": "token_out",
+   "ToModule": "MinWMAgent",
+   "ToPort": "token_out"
+  }
+ ]
+}
